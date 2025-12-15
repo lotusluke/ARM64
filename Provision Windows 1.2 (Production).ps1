@@ -16,7 +16,7 @@ $FirstBootKey = Test-Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE\F
 
 # Setting parameters for Domain Join
 $addComputerParam = @{
-    DomainName = 'hctra.pri'
+    DomainName = ''
     Restart = $true
 	NewName = $ComputerName
 	Options = 'JoinWithNewName', 'AccountCreate'
@@ -139,9 +139,9 @@ Clear-Host
 Write-Host "Enter your credentials to Join Domain:"
 
 #Detect if already joined to the domain and if not, Join Domain
-If ((Get-CimInstance Win32_ComputerSystem).Domain -eq "hctra.pri") {
+If ((Get-CimInstance Win32_ComputerSystem).Domain -eq "") {
 	Clear-Host
-	Write-Host "Domain is HCTRA, so Domain Join cancelled. Repair Complete. If it was renamed to LAPTOP-******** please join this machine to any workgroup and then re-join the HCTRA Domain with the correct Computer Name."
+	Write-Host "Domain is already joined, so Domain Join cancelled. Repair Complete. If it was renamed to LAPTOP-******** please join this machine to any workgroup and then re-join the HCTRA Domain with the correct Computer Name."
 	Start-Sleep -Seconds 10
 	Clear-Host
 #Housekeeping
@@ -151,6 +151,7 @@ If ((Get-CimInstance Win32_ComputerSystem).Domain -eq "hctra.pri") {
 } else {
     Add-Computer @addComputerParam
 }
+
 
 
 
