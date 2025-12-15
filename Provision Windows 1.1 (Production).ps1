@@ -9,7 +9,7 @@ $BypassNROKey = (Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersi
 $WinLogonPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 
 $addComputerParam = @{
-    DomainName = 'hctra.pri'
+    DomainName = ''
     Restart = $true
 	NewName = $ComputerName
 	Options = 'JoinWithNewName', 'AccountCreate'
@@ -93,9 +93,9 @@ Clear-Host
 
 Write-Host "Enter your credentials to Join Domain:"
 
-If ((Get-CimInstance Win32_ComputerSystem).Domain -eq "hctra.pri") {
+If ((Get-CimInstance Win32_ComputerSystem).Domain -eq "") {
 	
-	Write-Host "Domain is HCTRA, which means the Computer rename likely failed. Please join any workgroup to leave the domain and then re-join the Domain with the correct Computer Name."
+	Write-Host "Domain is , which means the Computer rename likely failed. Please join any workgroup to leave the domain and then re-join the Domain with the correct Computer Name."
 	Start-Sleep -Seconds 10
 	Clear-Host
 	Shutdown -r /t 0
@@ -105,6 +105,7 @@ If ((Get-CimInstance Win32_ComputerSystem).Domain -eq "hctra.pri") {
     Add-Computer @addComputerParam
 
 }
+
 
 
 
