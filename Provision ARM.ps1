@@ -9,7 +9,7 @@ If ($correct = "Y")
 
 
 $addComputerParam = @{
-    DomainName = 'hctra.pri'
+    DomainName = ''
     Restart = $true
 	NewName = $ComputerName
 	Options = 'JoinWithNewName'
@@ -17,7 +17,7 @@ $addComputerParam = @{
 #	Whatif = $true		
 }
 
-Rename-Computer -NewName $ComputerName -DomainCredential "hctra.pri\smithl75717" -Force
+Rename-Computer -NewName $ComputerName -DomainCredential "" -Force
 
 Remove-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\OOBE" -Name "LaunchUserOOBE"
 
@@ -36,6 +36,7 @@ Write-Host "Re-Run Script to re-enter Computer Name"
 exit
 
 Pause
+
 
 
 
